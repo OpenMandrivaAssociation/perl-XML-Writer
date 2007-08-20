@@ -10,7 +10,7 @@ License:	GPL or Artistic
 URL:		http://search.cpan.org/dist/%{module}
 Group:		Development/Perl
 Source0:	%{module}-%{version}.tar.bz2
-BuildRequires:	perl, perl-devel
+BuildRequires:	perl-devel
 BuildRequires:	perl-XML-Parser
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-buildroot
 BuildArch:	noarch
