@@ -1,19 +1,20 @@
-%define module 	XML-Writer
-%define version 0.606
-%define release %mkrel 2
+%define upstream_name 	 XML-Writer
+%define upstream_version 0.607
+
+Name:       perl-%{upstream_name}
+Version:    %perl_convert_version %{upstream_version}
+Release:    %mkrel 1
 
 Summary:	Module for writing XML documents
-Name: 		perl-%{module}
-Version: 	%{version}
-Release: 	%{release}
-License:	GPL or Artistic
-URL:		http://search.cpan.org/dist/%{module}
+License:	GPL+ or Artistic
 Group:		Development/Perl
-Source0:	%{module}-%{version}.tar.bz2
-BuildRequires:	perl-devel
-BuildRequires:	perl-XML-Parser
-BuildRoot: 	%{_tmppath}/%{name}-%{version}-buildroot
+Url:		http://search.cpan.org/dist/%{upstream_name}
+Source0:	%{upstream_name}-%{upstream_version}.tar.gz
+
+BuildRequires:	perl(XML::Parser)
+
 BuildArch:	noarch
+BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}
 
 %description
 XML::Writer is a simple Perl module for writing XML documents: it
@@ -24,14 +25,14 @@ end tags match, that there is exactly one document element, and that
 there are not duplicate attribute names.
 
 %prep
-%setup -q -n %{module}-%{version}
+%setup -q -n %{upstream_name}-%{upstream_version}
 
 %build
 %{__perl} Makefile.PL INSTALLDIRS=vendor
-%{__make}
+%make
 
 %check
-make test
+%make test
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -45,5 +46,3 @@ rm -rf $RPM_BUILD_ROOT
 %doc README Changes
 %{perl_vendorlib}/XML/Writer*
 %{_mandir}/*/*
-
-
