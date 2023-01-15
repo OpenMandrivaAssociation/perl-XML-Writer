@@ -1,14 +1,13 @@
 %define modname	XML-Writer
-%define modver	0.612
 
 Summary:	Module for writing XML documents
 Name:		perl-%{modname}
-Version:	%perl_convert_version %{modver}
+Version:	0.900
 Release:	1
 License:	GPLv2+ or Artistic
 Group:		Development/Perl
 Url:		http://search.cpan.org/dist/%{modname}
-Source0:	%{modname}-%{modver}.tar.gz
+Source0:	http://www.cpan.org/modules/by-module/XML/%{modname}-%{version}.tar.gz
 BuildArch:	noarch
 BuildRequires:	perl(Test::More)
 BuildRequires:	perl-devel
@@ -23,20 +22,19 @@ end tags match, that there is exactly one document element, and that
 there are not duplicate attribute names.
 
 %prep
-%setup -qn %{modname}-%{modver}
+%autosetup -p1 -n %{modname}-%{version}
+perl Makefile.PL INSTALLDIRS=vendor
 
 %build
-%__perl Makefile.PL INSTALLDIRS=vendor
-%make
+%make_build
 
 %check
 %make test
 
 %install
-%makeinstall_std
+%make_install
 
 %files
 %doc README Changes
 %{perl_vendorlib}/XML/Writer*
 %{_mandir}/man3/*
-
